@@ -6,7 +6,7 @@ using NAlex.TextModel.Interfaces;
 
 namespace NAlex.TextModel.Model
 {
-    public class Punctuation : ITextItem
+    public struct Punctuation : ITextItem
     {
         private char _value;
 

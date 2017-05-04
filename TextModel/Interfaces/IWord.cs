@@ -6,9 +6,9 @@ using NAlex.TextModel.Model;
 
 namespace NAlex.TextModel.Interfaces
 {
-    public interface IWord: ITextItem, IEnumerable<char>
+    public interface IWord: ITextItem, IEnumerable<WordSymbol>
     {
-        char this[int index] { get; set; }
+        WordSymbol this[int index] { get; set; }
         int Length { get; }
     }
 }
