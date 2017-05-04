@@ -10,7 +10,7 @@ namespace NAlex.TextModel.Interfaces
         string Value { get; }
         ITextItem this[int index] { get; set; }
         int Count();
-        void Insert(int index, ITextItem item);
-        bool RemoveAt(int index);
+        void Add(ITextItem item);
+        bool Remove(ITextItem item);
     }
 }

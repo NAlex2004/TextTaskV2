@@ -59,7 +59,7 @@ namespace NAlex.TextModel.Model
 
         public IEnumerator<WordSymbol> GetEnumerator()
         {
-            return word.GetEnumerator();            
+            return word.GetEnumerator();
         }
 
         System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
