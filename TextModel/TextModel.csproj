@@ -41,9 +41,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Interfaces\ISentence.cs" />
+    <Compile Include="Interfaces\ISentenceEndings.cs" />
     <Compile Include="Interfaces\ITextItem.cs" />
     <Compile Include="Interfaces\IWord.cs" />
     <Compile Include="Model\Punctuation.cs" />
+    <Compile Include="Model\SentenceEndings.cs" />
     <Compile Include="Model\Word.cs" />
     <Compile Include="Model\WordSymbol.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
