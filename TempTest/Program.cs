@@ -22,8 +22,8 @@ namespace TempTest
             sentence.Add(p1);
             sentence.Add(new Word(" Sentence"));
             sentence.Add(p2);
-
-            Console.WriteLine(sentence.ToString());
+			sentence.AddRange(new ITextItem[] { new Punctuation('!'), new Punctuation('?')});
+            Console.WriteLine(sentence);
 //            IWord w2 = new Word();
         }
     }
