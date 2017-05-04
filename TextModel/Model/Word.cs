@@ -51,7 +51,7 @@ namespace NAlex.TextModel.Model
 
         public string Value
         {
-            get 
+            get
             {
                 return new string(word.SelectMany(c => c.Value).ToArray());
             }
