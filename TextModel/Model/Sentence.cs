@@ -87,7 +87,10 @@ namespace NAlex.TextModel.Model
             return items.Remove(item);
         }
 
-        public Punctuation[] SentenceEndings { get; }
+        public Punctuation[] SentenceEndings
+        {
+            get { return sentenceEndings; }
+        }
 
     }
 }
