@@ -6,9 +6,9 @@ using NAlex.TextModel.Interfaces;
 
 namespace NAlex.TextModel.Model
 {
-    public struct SentenceEndings: ISentenceEndings
+    public static class SentenceEndings: ISentenceEndings
     {
-        public Punctuation[] GetSentenceEndings()
+        public static Punctuation[] GetSentenceEndings()
         {
             return new Punctuation[] 
             {
