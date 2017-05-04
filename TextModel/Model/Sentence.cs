@@ -9,15 +9,23 @@ namespace NAlex.TextModel.Model
     public class Sentence: ISentence
     {
         protected ICollection<ITextItem> items;
+        protected Punctuation[] sentenceEndings;
 
         public Sentence()
         {
             items = new List<ITextItem>();
+            sentenceEndings = new Punctuation[]
+            {
+                new Punctuation('.'),
+                new Punctuation('!'),
+                new Punctuation('?')
+            };
         }
 
         public Sentence(ISentenceFactory factory)
         {
             items = factory.CreateSentenceItems();
+            sentenceEndings = factory.CreateSentenceEndings();
         }
 
         public IEnumerator<ITextItem> GetEnumerator()
@@ -79,14 +87,7 @@ namespace NAlex.TextModel.Model
             return items.Remove(item);
         }
 
-        public Punctuation[] GetSentenceEndings()
-        {
-            return new Punctuation[]
-            {
-                new Punctuation('.'),
-                new Punctuation('!'),
-                new Punctuation('?')
-            };
-        }
+        public Punctuation[] SentenceEndings { get; }
+
     }
 }
