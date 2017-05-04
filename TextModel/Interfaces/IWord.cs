@@ -8,7 +8,7 @@ namespace NAlex.TextModel.Interfaces
 {
     public interface IWord: ITextItem, IEnumerable<WordSymbol>
     {
-        WordSymbol this[int index] { get; set; }
+        WordSymbol this[int index] { get; }
         int Length { get; }
     }
 }
