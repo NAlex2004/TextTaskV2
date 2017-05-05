@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,7 +9,7 @@ namespace NAlex.TextModel.Model
 {
     public class Sentence: ISentence
     {
-        protected ICollection<ITextItem> items;
+        protected IList<ITextItem> items; 
         protected Punctuation[] sentenceEndings;
 
         public Sentence()
@@ -92,5 +93,45 @@ namespace NAlex.TextModel.Model
             get { return sentenceEndings; }
         }
 
+        public bool Replace(ITextItem oldItem, IEnumerable<ITextItem> newItems)
+        {
+            bool result = false;
+
+            if (newItems != null)
+            {
+                int index = items.IndexOf(oldItem);
+                if (index >= 0)
+                {
+                    items.RemoveAt(index);
+                    foreach (var item in newItems)
+                    {
+                        items.Insert(index, item);
+                        index++;
+                    }
+                    result = true;
+                }
+            }
+
+            return result;
+        }
+
+        public bool Replace(Func<ITextItem, bool> searchCondition, IEnumerable<ITextItem> newItems)
+        {
+            bool result = true;
+
+            var oldItems = items.Where(searchCondition).ToArray();
+
+            if (oldItems.Length > 0)
+            {
+                foreach (var item in oldItems)
+                {
+                    result &= Replace(item, newItems);
+                }
+
+                return result;
+            }
+                
+            return false;
+        }
     }
 }

@@ -8,9 +8,7 @@ using NAlex.TextModel.Model;
 namespace NAlex.TextModel.Parsers
 {
     public class LineParser: IParser
-    {
-        ISentence sentence;
-        IWord word;
+    {        
         string text;
         ISentenceFactory factory;
 
@@ -45,7 +43,7 @@ namespace NAlex.TextModel.Parsers
         {
             ICollection<ISentence> list = new List<ISentence>();
             ICollection<WordSymbol> symbols = new List<WordSymbol>();
-            sentence = new Sentence(factory);
+            ISentence sentence = new Sentence(factory);
 
             if (string.IsNullOrEmpty(text))
                 return list;
@@ -57,15 +55,13 @@ namespace NAlex.TextModel.Parsers
             {
                 // NewLines ???
 
-                char ch = text[i].Equals(tab) ? ' ' : text[i];
-
-                // skip spaces & tabs
-                Skip(ref i, c => c.Equals(' ') || c.Equals(tab));
-                //while (i < (text.Length - 1) && (text[i+1].Equals(' ') || text[i+1].Equals(tab)))
-                //    i++;                
+                char ch = text[i].Equals(tab) ? ' ' : text[i];                     
 
                 if (ch.Equals(' '))
                 {
+                    // skip additional spaces & tabs
+                    Skip(ref i, c => c.Equals(' ') || c.Equals(tab));
+
                     if (symbols.Count > 0)
                     {
                         sentence.Add(new Word(symbols));
@@ -92,9 +88,9 @@ namespace NAlex.TextModel.Parsers
                             sentence.AddRange(marks);
                             last = (Punctuation)marks.ElementAt(marks.Count() - 1);
                         }
-
+                        
                         // sentence end
-                        if (sentence.SentenceEndings.Contains(last) && i < (text.Length - 1) && text[i].Equals(' '))
+                        if (sentence.SentenceEndings.Contains(last) && i < (text.Length - 1) && text[i + 1].Equals(' '))
                         {
                             list.Add(sentence);
                             sentence = new Sentence(factory);

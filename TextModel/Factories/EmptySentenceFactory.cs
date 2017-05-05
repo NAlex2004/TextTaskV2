@@ -9,7 +9,7 @@ namespace NAlex.TextModel.Factories
 {
     public class EmptySentenceFactory: ISentenceFactory
     {
-        public ICollection<ITextItem> CreateSentenceItems()
+        public IList<ITextItem> CreateSentenceItems()
         {
             return new List<ITextItem>();
         }

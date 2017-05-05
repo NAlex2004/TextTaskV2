@@ -36,8 +36,29 @@ namespace TempTest
             IParser parser = new LineParser(text, new EmptySentenceFactory());
             ICollection<ISentence> model = parser.GetTextModel();
             //model.SelectMany(s => s.Select(i => i.Value)).ToList().ForEach(s => Console.WriteLine(s));
-            foreach (var sent in model)
-                Console.Write(sent);
+            //foreach (var sent in model)
+            //    Console.Write(sent);
+            model.OrderBy(s => s.OfType<Word>().Count()).ToList().ForEach(s => Console.WriteLine("{0} {1}", s.OfType<Word>().Count(), s));
+            var q = model.Where(s => s.ToString().EndsWith("?")).SelectMany(s => s.OfType<Word>()).Where(w => w.Length == 3)
+                //.GroupBy(w => w.Value)
+                //.Select(g => g.Key);
+                .Select(w => new { Text = w.Value }) // компаратор автоматически создан
+                .Distinct();            
+
+            foreach (var w in q)
+                Console.WriteLine(w.Text);
+
+            var words = model.SelectMany(s => s.OfType<Word>()).Where(w => w.Length == 3).ToArray(); // еще согласные проверить
+            foreach (var w in words)
+            {
+                foreach (var s in model)
+                    s.Remove(w);
+            }
+            model.OrderBy(s => s.OfType<Word>().Count()).ToList().ForEach(s => Console.WriteLine("{0} {1}", s.OfType<Word>().Count(), s));
+
+            // замена
+            model.OrderBy(s => s.OfType<Word>().Count()).LastOrDefault().Replace(i => i.Value.Length == 5, sentence);
+            model.OrderBy(s => s.OfType<Word>().Count()).ToList().ForEach(s => Console.WriteLine("{0} {1}", s.OfType<Word>().Count(), s));
             Console.ReadKey();
         }
     }

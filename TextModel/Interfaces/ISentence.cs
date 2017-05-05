@@ -14,6 +14,8 @@ namespace NAlex.TextModel.Interfaces
         void Add(ITextItem item);
         void AddRange(IEnumerable<ITextItem> items);
         bool Remove(ITextItem item);
+        bool Replace(ITextItem oldItem, IEnumerable<ITextItem> newItems);
+        bool Replace(Func<ITextItem, bool> searchCondition, IEnumerable<ITextItem> newItems);
         Punctuation[] SentenceEndings { get; }
     }
 }

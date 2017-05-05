@@ -57,6 +57,11 @@ namespace NAlex.TextModel.Model
             }
         }
 
+        public override string ToString()
+        {
+            return Value;
+        }
+
         public IEnumerator<WordSymbol> GetEnumerator()
         {
             return word.GetEnumerator();
@@ -66,5 +71,6 @@ namespace NAlex.TextModel.Model
         {
             return this.GetEnumerator();
         }
+
     }
 }

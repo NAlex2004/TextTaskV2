@@ -5,7 +5,7 @@ namespace NAlex.TextModel.Interfaces
 {
     public interface ISentenceFactory
     {
-        ICollection<ITextItem> CreateSentenceItems();
+        IList<ITextItem> CreateSentenceItems();
         Punctuation[] CreateSentenceEndings();
     }
 }
