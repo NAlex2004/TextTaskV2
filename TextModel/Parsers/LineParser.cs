@@ -39,7 +39,7 @@ namespace NAlex.TextModel.Parsers
             }
 
             return items;
-        }
+        }        
 
         public ICollection<ISentence> GetTextModel()
         {
@@ -69,7 +69,7 @@ namespace NAlex.TextModel.Parsers
                     if (symbols.Count > 0)
                     {
                         sentence.Add(new Word(symbols));
-                        symbols.Clear();
+                        symbols = new List<WordSymbol>();
                     }
                     sentence.Add(new Space());
                 }
@@ -83,7 +83,7 @@ namespace NAlex.TextModel.Parsers
                         if (symbols.Count > 0)
                         {
                             sentence.Add(new Word(symbols));
-                            symbols.Clear();
+                            symbols = new List<WordSymbol>();
                         }
 
                         sentence.Add(last);
@@ -94,7 +94,7 @@ namespace NAlex.TextModel.Parsers
                         }
 
                         // sentence end
-                        if (sentence.SentenceEndings.Contains(last))
+                        if (sentence.SentenceEndings.Contains(last) && i < (text.Length - 1) && text[i].Equals(' '))
                         {
                             list.Add(sentence);
                             sentence = new Sentence(factory);
