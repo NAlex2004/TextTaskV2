@@ -66,6 +66,11 @@ namespace NAlex.TextModel.Parsers
 
                 if (ch.Equals(' '))
                 {
+                    if (symbols.Count > 0)
+                    {
+                        sentence.Add(new Word(symbols));
+                        symbols.Clear();
+                    }
                     sentence.Add(new Space());
                 }
                 else
@@ -105,6 +110,8 @@ namespace NAlex.TextModel.Parsers
                 i++;
             }
 
+            if (symbols.Count > 0)
+                sentence.Add(new Word(symbols));
             if (sentence.Count() > 0)
                 list.Add(sentence);
 
