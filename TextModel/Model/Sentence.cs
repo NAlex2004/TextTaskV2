@@ -59,7 +59,15 @@ namespace NAlex.TextModel.Model
 
         public ITextItem this[int index]
         {
-            get { return items.ElementAt(index); }
+            get 
+            {
+                //return items.ElementAt(index); 
+                return items[index];
+            }
+            set
+            {
+                items[index] = value;
+            }
         }
 
         public int Count()
