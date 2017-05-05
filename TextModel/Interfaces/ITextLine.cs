@@ -1,6 +1,8 @@
-﻿namespace NAlex.TextModel.Interfaces
+﻿using System.Collections.Generic;
+
+namespace NAlex.TextModel.Interfaces
 {
-    public interface ITextLine: ISentence
+    public interface ITextLine: ICollection<ISentence>
     {
 
     }

@@ -6,9 +6,8 @@ using NAlex.TextModel.Model;
 
 namespace NAlex.TextModel.Interfaces
 {
-    public interface ITextPage: IEnumerable<ITextLine>
+    public interface IPageParser
     {
-        int PageNumber { get; }
-        int LinesPerPage { get; }
+        IEnumerable<ITextPage> GetTextPages();
     }
 }
