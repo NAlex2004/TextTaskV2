@@ -16,8 +16,8 @@ namespace NAlex.TextModel.Model
 
         public WordSymbol(char value)
         {
-            if (char.IsPunctuation(value))
-                throw new ArgumentException(string.Format("'{0}' is a punctuation mark.", value));
+            if (char.IsPunctuation(value) || value == ' ')
+                throw new ArgumentException(string.Format("'{0}' is a punctuation mark or space.", value));
             _value = value;
         }
 
@@ -26,8 +26,9 @@ namespace NAlex.TextModel.Model
             get { return _value.ToString(); }
             set
             {
-                if (!string.IsNullOrEmpty(value) && !char.IsPunctuation(value[0]))
-                    _value = value[0];
+                string str = value.Trim();
+                if (!string.IsNullOrEmpty(str) && !char.IsPunctuation(str[0]))
+                    _value = str[0];
             }
         }
 
