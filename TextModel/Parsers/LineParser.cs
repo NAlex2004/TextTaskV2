@@ -7,14 +7,14 @@ using NAlex.TextModel.Model;
 
 namespace NAlex.TextModel.Parsers
 {
-    public class Parser: IParser
+    public class LineParser: IParser
     {
         ISentence sentence;
         IWord word;
         string text;
         ISentenceFactory factory;
 
-        public Parser(string line, ISentenceFactory sentenceFactory)
+        public LineParser(string line, ISentenceFactory sentenceFactory)
         {
             text = line;
             factory = sentenceFactory;

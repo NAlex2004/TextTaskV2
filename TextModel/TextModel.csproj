@@ -40,6 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Factories\EmptySentenceFactory.cs" />
     <Compile Include="Interfaces\IParser.cs" />
     <Compile Include="Interfaces\ISentence.cs" />
     <Compile Include="Interfaces\ISentenceFactory.cs" />
@@ -51,12 +52,11 @@
     <Compile Include="Model\Space.cs" />
     <Compile Include="Model\Word.cs" />
     <Compile Include="Model\WordSymbol.cs" />
-    <Compile Include="Parsers\Parser.cs" />
+    <Compile Include="Parsers\LineParser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Collections\" />
-    <Folder Include="Factories\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
