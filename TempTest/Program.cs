@@ -40,7 +40,7 @@ namespace TempTest
             //model.SelectMany(s => s.Select(i => i.Value)).ToList().ForEach(s => Console.WriteLine(s));
             //foreach (var sent in model)
             //    Console.Write(sent);
-
+            
             // по возрастанию кол-ва слов
             model.OrderBy(s => s.OfType<Word>().Count()).ToList().ForEach(s => Console.WriteLine("{0} {1}", s.OfType<Word>().Count(), s));
 

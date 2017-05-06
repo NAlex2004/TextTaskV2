@@ -42,6 +42,8 @@
   <ItemGroup>
     <Compile Include="Extensions\Extensions.cs" />
     <Compile Include="Factories\EmptySentenceFactory.cs" />
+    <Compile Include="Interfaces\ICorcordance.cs" />
+    <Compile Include="Interfaces\IEntry.cs" />
     <Compile Include="Interfaces\IPageParser.cs" />
     <Compile Include="Interfaces\ITextPage.cs" />
     <Compile Include="Interfaces\IParser.cs" />
@@ -50,6 +52,7 @@
     <Compile Include="Interfaces\ITextItem.cs" />
     <Compile Include="Interfaces\ITextLine.cs" />
     <Compile Include="Interfaces\IWord.cs" />
+    <Compile Include="Model\Entry.cs" />
     <Compile Include="Model\Page.cs" />
     <Compile Include="Model\Punctuation.cs" />
     <Compile Include="Model\Sentence.cs" />

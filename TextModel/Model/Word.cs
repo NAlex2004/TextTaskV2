@@ -72,5 +72,10 @@ namespace NAlex.TextModel.Model
             return this.GetEnumerator();
         }
 
+
+        public int CompareTo(IWord other)
+        {
+            return Value.CompareTo(other.ToString());
+        }
     }
 }
