@@ -5,7 +5,7 @@ using System.Text;
 
 namespace NAlex.TextModel.Interfaces
 {
-    public interface IEntry<TKey, TPositions>
+    public interface IEntry<out TKey, out TPositions>
     {
         TKey Key { get; }
         int EntryCount { get; }

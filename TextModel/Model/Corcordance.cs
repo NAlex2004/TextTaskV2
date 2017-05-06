@@ -44,7 +44,13 @@ namespace NAlex.TextModel.Model
             WordSymbol key = new WordSymbol(entry.Key.Value[0]);
 
             if (corcordanceEntries.Keys.Contains(key))
-                return corcordanceEntries[key].Remove(entry);
+            {
+                bool res = corcordanceEntries[key].Remove(entry);
+                // no more entries left
+                if (corcordanceEntries[key].FirstOrDefault() == null)
+                    corcordanceEntries.Remove(key);
+                return res;
+            }
             else
                 return false;
         }
@@ -65,8 +71,9 @@ namespace NAlex.TextModel.Model
                 }
                 writer.WriteLine();
             }
-
+            writer.Flush();
             stream.Seek(0, SeekOrigin.Begin);
+
             return stream;
         }
 
