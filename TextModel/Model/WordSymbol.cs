@@ -10,7 +10,7 @@ namespace NAlex.TextModel.Model
     /// <summary>
     /// Non-punctuation symbol
     /// </summary>
-    public struct WordSymbol : IComparable<WordSymbol>
+    public struct WordSymbol : IComparable<WordSymbol>, IEquatable<WordSymbol>
     {
         private char _value;
 
@@ -62,5 +62,19 @@ namespace NAlex.TextModel.Model
             return _value.CompareTo(other.Value[0]);
         }
 
+        //public override bool Equals(object obj)
+        //{
+        //    return base.Equals(obj);
+        //}
+
+        public bool Equals(WordSymbol other)
+        {
+            return Value.Equals(other.Value);
+        }
+
+        public override int GetHashCode()
+        {
+            return Value.GetHashCode();
+        }
     }
 }

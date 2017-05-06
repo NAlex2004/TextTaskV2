@@ -10,5 +10,7 @@ namespace NAlex.TextModel.Interfaces
         TKey Key { get; }
         int EntryCount { get; }
         IEnumerable<TPositions> EntryPositions { get; }
+        //void AddPosition(TPositions position);
+        //bool RemovePosition(TPositions position);
     }
 }

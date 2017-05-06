@@ -77,5 +77,15 @@ namespace NAlex.TextModel.Model
         {
             return Value.CompareTo(other.ToString());
         }
+
+        public bool Equals(IWord other)
+        {
+            return Value.Equals(other.Value);
+        }
+
+        public override int GetHashCode()
+        {
+            return Value.GetHashCode();
+        }
     }
 }

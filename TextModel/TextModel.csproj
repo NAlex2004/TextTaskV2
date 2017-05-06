@@ -52,6 +52,7 @@
     <Compile Include="Interfaces\ITextItem.cs" />
     <Compile Include="Interfaces\ITextLine.cs" />
     <Compile Include="Interfaces\IWord.cs" />
+    <Compile Include="Model\Corcordance.cs" />
     <Compile Include="Model\Entry.cs" />
     <Compile Include="Model\Page.cs" />
     <Compile Include="Model\Punctuation.cs" />
