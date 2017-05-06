@@ -11,6 +11,6 @@ namespace NAlex.TextModel.Interfaces
         IEnumerable<TEntry> this[TKey key] { get; }
         void AddEntry(TEntry entry);
         bool RemoveEntry(TEntry entry);
-        Stream GetCorcordance();
+        Stream ToStream();
     }
 }

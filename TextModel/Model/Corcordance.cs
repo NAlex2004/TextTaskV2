@@ -9,7 +9,7 @@ namespace NAlex.TextModel.Model
 {
     public class Corcordance: ICorcordance<WordSymbol, IEntry<IWord, int>>
     {
-        private IDictionary<WordSymbol, ICollection<IEntry<IWord, int>>> corcordanceEntries = 
+        private readonly IDictionary<WordSymbol, ICollection<IEntry<IWord, int>>> corcordanceEntries =
             new Dictionary<WordSymbol, ICollection<IEntry<IWord, int>>>();
 
         public IEnumerable<IEntry<IWord, int>> this[WordSymbol key]
@@ -27,7 +27,7 @@ namespace NAlex.TextModel.Model
             if (corcordanceEntries.Keys.Contains(key))
             {
                 // entry does not exists
-                if (corcordanceEntries[key].Where(e => e.Key.Equals(entry.Key)).FirstOrDefault() != null)
+                if (corcordanceEntries[key].FirstOrDefault(e => e.Key.Equals(entry.Key)) != null)
                     corcordanceEntries[key].Add(entry);
             }
             else
@@ -55,7 +55,7 @@ namespace NAlex.TextModel.Model
                 return false;
         }
 
-        public Stream GetCorcordance()
+        public Stream ToStream()
         {
             MemoryStream stream = new MemoryStream();
             StreamWriter writer = new StreamWriter(stream);
