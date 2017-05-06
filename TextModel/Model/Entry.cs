@@ -32,5 +32,19 @@ namespace NAlex.TextModel.Model
             Key = key;
             _positions = entries;
         }
+
+
+        public string EntryValue
+        {
+            get
+            {
+                StringBuilder sb = new StringBuilder();
+                sb.Append(EntryCount).Append(":  ");
+                foreach (var position in _positions)
+                    sb.Append(position).Append(' ');
+
+                return sb.ToString();
+            }
+        }
     }
 }

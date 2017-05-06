@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using NAlex.TextModel.Interfaces;
+using System.IO;
 
 namespace NAlex.TextModel.Model
 {
@@ -48,9 +49,25 @@ namespace NAlex.TextModel.Model
                 return false;
         }
 
-        public System.IO.Stream GetCorcordance()
+        public Stream GetCorcordance()
         {
-            throw new NotImplementedException();
+            MemoryStream stream = new MemoryStream();
+            StreamWriter writer = new StreamWriter(stream);
+
+            foreach (var key in corcordanceEntries.Keys)
+            {
+                writer.WriteLine("{0}:", key.Value.ToUpper());
+                writer.WriteLine();
+
+                foreach (var entry in corcordanceEntries[key])
+                {
+                    writer.WriteLine("{0, -20}..........{1}", entry.Key.Value.ToLower(), entry.EntryValue);                    
+                }
+                writer.WriteLine();
+            }
+
+            stream.Seek(0, SeekOrigin.Begin);
+            return stream;
         }
 
         public IEnumerator<KeyValuePair<WordSymbol, IEnumerable<IEntry<IWord, int>>>> GetEnumerator()
