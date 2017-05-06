@@ -10,13 +10,6 @@ namespace NAlex.TextModel.Parsers
     public class LineParser: IParser
     {        
         string text;
-        ISentenceFactory factory;
-
-        public LineParser(string line, ISentenceFactory sentenceFactory)
-        {
-            text = line;
-            factory = sentenceFactory;
-        }
 
         ITextItem CreateNonWordItem(char ch)
         {
@@ -37,13 +30,15 @@ namespace NAlex.TextModel.Parsers
             }
 
             return items;
-        }        
+        }
 
-        public ICollection<ISentence> GetTextModel()
+        public ICollection<ISentence> GetTextModel(string line, ISentenceFactory sentenceFactory)
         {
             ICollection<ISentence> list = new List<ISentence>();
             ICollection<WordSymbol> symbols = new List<WordSymbol>();
-            ISentence sentence = new Sentence(factory);
+            ISentence sentence = new Sentence(sentenceFactory);
+
+            text = line;
 
             if (string.IsNullOrEmpty(text))
                 return list;
@@ -93,7 +88,7 @@ namespace NAlex.TextModel.Parsers
                         if (sentence.SentenceEndings.Contains(last) && i < (text.Length - 1) && text[i + 1].Equals(' '))
                         {
                             list.Add(sentence);
-                            sentence = new Sentence(factory);
+                            sentence = new Sentence(sentenceFactory);
                         }
                     }
                     else

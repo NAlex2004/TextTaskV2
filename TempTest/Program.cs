@@ -35,8 +35,8 @@ namespace TempTest
             Console.WriteLine(sentence);
 
             string text = File.ReadAllText("test.txt", Encoding.UTF8);
-            IParser parser = new LineParser(text, new EmptySentenceFactory());
-            ICollection<ISentence> model = parser.GetTextModel();
+            IParser parser = new LineParser();
+            ICollection<ISentence> model = parser.GetTextModel(text, new EmptySentenceFactory());
             //model.SelectMany(s => s.Select(i => i.Value)).ToList().ForEach(s => Console.WriteLine(s));
             //foreach (var sent in model)
             //    Console.Write(sent);

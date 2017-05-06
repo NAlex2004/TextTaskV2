@@ -7,6 +7,6 @@ namespace NAlex.TextModel.Interfaces
 {
     public interface IParser
     {
-        ICollection<ISentence> GetTextModel();
+        ICollection<ISentence> GetTextModel(string line, ISentenceFactory sentenceFactory);
     }
 }

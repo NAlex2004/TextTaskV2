@@ -50,12 +50,14 @@
     <Compile Include="Interfaces\ITextItem.cs" />
     <Compile Include="Interfaces\ITextLine.cs" />
     <Compile Include="Interfaces\IWord.cs" />
+    <Compile Include="Model\Page.cs" />
     <Compile Include="Model\Punctuation.cs" />
     <Compile Include="Model\Sentence.cs" />
     <Compile Include="Model\Space.cs" />
     <Compile Include="Model\Word.cs" />
     <Compile Include="Model\WordSymbol.cs" />
     <Compile Include="Parsers\LineParser.cs" />
+    <Compile Include="Parsers\PageParser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />
