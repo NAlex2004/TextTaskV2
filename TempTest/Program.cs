@@ -42,7 +42,7 @@ namespace TempTest
             //    Console.Write(sent);
             
             // по возрастанию кол-ва слов
-            model.OrderBy(s => s.OfType<Word>().Count()).ToList().ForEach(s => Console.WriteLine("{0} {1}", s.OfType<Word>().Count(), s));
+            model.OrderBy(s => s.OfType<Word>().Count()).ToList().ForEach(s => Console.WriteLine("{0, -6} {1}", s.OfType<Word>().Count(), s));
 
             // в вопросительных слова заданной длины без повторений
             var q = model.Where(s => s.ToString().EndsWith("?")).SelectMany(s => s.OfType<Word>()).Where(w => w.Length == 3)
@@ -54,8 +54,11 @@ namespace TempTest
             foreach (var w in q)
                 Console.WriteLine(w.Text);            
 
-            // замена слов заданной длины на подстроку (предложение)
-            model.OrderBy(s => s.OfType<Word>().Count()).LastOrDefault().Replace(i => i.Value.Length == 5, sentence);
+            // замена слов заданной длины на подстроку (в последнем предложении)
+            var qq = model.OrderBy(s => s.OfType<Word>().Count()).LastOrDefault();
+            if (qq != null)
+                qq.Replace(i => i.Value.Length == 5, sentence);
+
             model.OrderBy(s => s.OfType<Word>().Count()).ToList().ForEach(s => Console.WriteLine("{0} {1}", s.OfType<Word>().Count(), s));
 
             // удаление на согласную
@@ -69,6 +72,17 @@ namespace TempTest
             }
 
             model.OrderBy(s => s.OfType<Word>().Count()).ToList().ForEach(s => Console.WriteLine("{0} {1}", s.OfType<Word>().Count(), s));
+
+            ICorcordanceBuilder<WordSymbol, IEntry<IWord, int> > corcordanceBuilder = new CorcordanceFileBuilder("test.txt", 5,
+                new PageParser(), new EmptySentenceFactory());
+
+            var corcordance = corcordanceBuilder.BuildCorcordance();
+
+            using (FileStream oStream = new FileStream("corcordance.txt", FileMode.Create, FileAccess.Write))
+            {
+                corcordance.ToStream().CopyTo(oStream);
+                oStream.Flush();
+            }
 
             Console.ReadKey();
         }

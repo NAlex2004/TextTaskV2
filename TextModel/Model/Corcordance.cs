@@ -22,12 +22,12 @@ namespace NAlex.TextModel.Model
             if (entry == null || entry.Key == null)
                 return;
 
-            WordSymbol key = new WordSymbol(entry.Key.Value[0]);
+            WordSymbol key = new WordSymbol(entry.Key.Value.ToUpper()[0]);
 
             if (corcordanceEntries.Keys.Contains(key))
             {
                 // entry does not exists
-                if (corcordanceEntries[key].FirstOrDefault(e => e.Key.Equals(entry.Key)) != null)
+                if (corcordanceEntries[key].FirstOrDefault(e => e.Key.Value.Equals(entry.Key.Value, StringComparison.OrdinalIgnoreCase)) != null)
                     corcordanceEntries[key].Add(entry);
             }
             else
@@ -60,15 +60,16 @@ namespace NAlex.TextModel.Model
             MemoryStream stream = new MemoryStream();
             StreamWriter writer = new StreamWriter(stream);
 
-            foreach (var key in corcordanceEntries.Keys)
+            foreach (var key in corcordanceEntries.Keys.OrderBy(k => k))
             {
-                writer.WriteLine("{0}:", key.Value.ToUpper());
-                writer.WriteLine();
+                writer.WriteLine("{0}:", key);
+//                writer.WriteLine();
 
                 foreach (var entry in corcordanceEntries[key])
                 {
                     writer.WriteLine("{0, -20}..........{1}", entry.Key.Value.ToLower(), entry.EntryValue);                    
                 }
+                writer.WriteLine();
                 writer.WriteLine();
             }
             writer.Flush();

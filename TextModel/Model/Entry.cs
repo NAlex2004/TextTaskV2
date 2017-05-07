@@ -31,6 +31,8 @@ namespace NAlex.TextModel.Model
         {
             Key = key;
             _positions = entries;
+            if (_positions != null)
+                EntryCount = _positions.Count();
         }
 
 
