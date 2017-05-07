@@ -27,7 +27,7 @@ namespace NAlex.TextModel.Model
             if (corcordanceEntries.Keys.Contains(key))
             {
                 // entry does not exists
-                if (corcordanceEntries[key].FirstOrDefault(e => e.Key.Value.Equals(entry.Key.Value, StringComparison.OrdinalIgnoreCase)) != null)
+                if (corcordanceEntries[key].FirstOrDefault(e => e.Key.Value.Equals(entry.Key.Value, StringComparison.OrdinalIgnoreCase)) == null)
                     corcordanceEntries[key].Add(entry);
             }
             else
@@ -62,12 +62,14 @@ namespace NAlex.TextModel.Model
 
             foreach (var key in corcordanceEntries.Keys.OrderBy(k => k))
             {
-                writer.WriteLine("{0}:", key);
-//                writer.WriteLine();
+                writer.WriteLine(" {0}:", key);
+                writer.WriteLine();
 
-                foreach (var entry in corcordanceEntries[key])
+                foreach (var entry in corcordanceEntries[key].OrderBy(e => e.Key))
                 {
-                    writer.WriteLine("{0, -20}..........{1}", entry.Key.Value.ToLower(), entry.EntryValue);                    
+                    string s = entry.Key.Value.ToLower();
+
+                    writer.WriteLine("{0}....{1}", entry.Key.Value.ToLower().PadRight(60, '.'), entry.EntryValue);
                 }
                 writer.WriteLine();
                 writer.WriteLine();
