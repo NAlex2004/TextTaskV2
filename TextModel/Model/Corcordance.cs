@@ -26,9 +26,17 @@ namespace NAlex.TextModel.Model
 
             if (corcordanceEntries.Keys.Contains(key))
             {
+                var existingEntry = corcordanceEntries[key]
+                    .FirstOrDefault(e => e.Key.Value.Equals(entry.Key.Value, StringComparison.OrdinalIgnoreCase));
                 // entry does not exists
-                if (corcordanceEntries[key].FirstOrDefault(e => e.Key.Value.Equals(entry.Key.Value, StringComparison.OrdinalIgnoreCase)) == null)
+                if (existingEntry == null)
                     corcordanceEntries[key].Add(entry);
+                else
+                {
+                    // replace existing entry
+                    if (corcordanceEntries[key].Remove(existingEntry))
+                        corcordanceEntries[key].Add(entry);
+                }
             }
             else
             {
@@ -41,7 +49,7 @@ namespace NAlex.TextModel.Model
             if (entry == null || entry.Key == null)
                 return false;
 
-            WordSymbol key = new WordSymbol(entry.Key.Value[0]);
+            WordSymbol key = new WordSymbol(entry.Key.Value.ToUpper()[0]);
 
             if (corcordanceEntries.Keys.Contains(key))
             {
