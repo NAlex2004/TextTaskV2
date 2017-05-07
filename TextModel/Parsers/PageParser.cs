@@ -20,7 +20,6 @@ namespace NAlex.TextModel.Parsers
             if (stream != null && sentenceFactory != null)
             {
                 IParser lineParser = new LineParser();
-                ICollection<ISentence> line;
 
                 using (StreamReader reader = new StreamReader(stream))
                 {
@@ -28,6 +27,7 @@ namespace NAlex.TextModel.Parsers
                     int pageNumber = 1;
                     int lineNumber = 0;
                     ITextPage page = new Page(linesPerPage, pageNumber);
+                    ICollection<ISentence> line;
 
                     while ((str = reader.ReadLine()) != null)
                     {
