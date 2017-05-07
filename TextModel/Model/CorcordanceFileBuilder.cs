@@ -12,11 +12,15 @@ namespace NAlex.TextModel.Model
     {
         private readonly string _inputFile;
         private readonly int _linesPerPage;
+        private readonly IPageParser _parser;
+        private readonly ISentenceFactory _sentenceFactory;
 
-        public CorcordanceFileBuilder(string inputFile, int linesPerPage)
+        public CorcordanceFileBuilder(string inputFile, int linesPerPage, IPageParser parser, ISentenceFactory sentenceFactory)
         {
             _inputFile = inputFile;
             _linesPerPage = linesPerPage;
+            _parser = parser;
+            _sentenceFactory = sentenceFactory;
         }
 
         public ICorcordance<WordSymbol, IEntry<IWord, int>> BuildCorcordance()
@@ -28,8 +32,7 @@ namespace NAlex.TextModel.Model
             {
                 FileStream stream = new FileStream(_inputFile, FileMode.Open);
 
-                IPageParser parser = new PageParser();
-                pages = parser.GetTextPages(stream, _linesPerPage, new EmptySentenceFactory());
+                pages = _parser.GetTextPages(stream, _linesPerPage, _sentenceFactory);
 
                 stream.Dispose();
             }
