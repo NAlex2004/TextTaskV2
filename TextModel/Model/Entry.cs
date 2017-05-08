@@ -30,9 +30,9 @@ namespace NAlex.TextModel.Model
         public Entry(IWord key, IEnumerable<int> entries)
         {
             Key = key;
-            _positions = entries;
-            if (_positions != null)
-                EntryCount = _positions.Count();
+            if (entries != null)
+                EntryCount = entries.Count();
+            _positions = entries.Distinct();
         }
 
 

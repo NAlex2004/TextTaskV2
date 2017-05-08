@@ -52,7 +52,7 @@ namespace NAlex.TextModel.Model
 
             foreach (var pageWord in pageWords)
             {
-                var wordPages = pageWord.Distinct().OrderBy(i => i).ToArray();
+                var wordPages = pageWord.OrderBy(i => i).ToArray();
                 IEntry<IWord, int> entry = new Entry(pageWord.Key, wordPages);
                 corcordance.AddEntry(entry);
             }
