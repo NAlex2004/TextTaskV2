@@ -42,6 +42,9 @@ namespace NAlex.TextModel.Parsers
                             page = new Page(linesPerPage, pageNumber);
                         }
                     }
+
+                    if (page.Count > 0)
+                        pages.Add(page);
                 }
 
             }
