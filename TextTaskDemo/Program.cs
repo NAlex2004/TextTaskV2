@@ -37,7 +37,7 @@ namespace TextTaskDemo
 
 			foreach (var sentence in sentencies)
 			{
-				var words = sentence.OfType<IWord>().Where(w => w.Length == wordLength).Distinct();
+				var words = sentence.OfType<IWord>().Where(w => w.Length == wordLength).Select(w => w.Value.ToLower()).Distinct();
 				if (words.Any())
 				{
 					Console.WriteLine(sentence);
@@ -55,14 +55,31 @@ namespace TextTaskDemo
 
 		static void DeleteWordsStartWithConsonant(IEnumerable<ISentence> model, int wordLength)
 		{
+			Console.WriteLine("Удаляем слова длиной {0} символов, начинающиеся на согласную:", wordLength);
+			Console.Write(" Слова: ");
 			var words = model.SelectMany(s => s.OfType<IWord>())
 				.Where(w => w.Length == wordLength && !w[0].Value[0].IsVowel())
 				.ToArray();
 			foreach (var w in words)
 			{
+				Console.Write("{0} ", w);
 				foreach (var s in model)
 					s.Remove(w);
 			}
+			 
+			Console.WriteLine();
+			Console.WriteLine("Не удаляем:");
+			var notDeleted = model.SelectMany(s => s.OfType<IWord>())
+				.Where(w => w.Length == wordLength && w[0].Value[0].IsVowel())
+				.ToArray();
+			foreach (var w in notDeleted)
+			{
+				Console.Write("{0} ", w);
+
+			}
+
+			Console.WriteLine();
+			Console.WriteLine();
 		}
 
 		static void ReplaceWordInSentence(IEnumerable<ISentence> model, int index, int wordLength,
@@ -98,6 +115,8 @@ namespace TextTaskDemo
 
 		public static void Main(string[] args)
 		{
+            CreateCorcordance("test.txt", "corcordance.txt", 5);
+
 			IEnumerable<ISentence> model;
 
 			using (FileStream fStream = new FileStream("test.txt", FileMode.Open))
@@ -113,11 +132,10 @@ namespace TextTaskDemo
 			WriteOrderedSentencies(model);
 
 			Console.WriteLine("---------------------------------------------------");
-			WriteWordsOfInterrogativeSentence(model, 5);
+			WriteWordsOfInterrogativeSentence(model, 6);
 
 			Console.WriteLine("---------------------------------------------------");
-			Console.WriteLine("Удаление слов, начинающихся на согласную длиной 5 символов:");
-			DeleteWordsStartWithConsonant(model, 5);
+			DeleteWordsStartWithConsonant(model, 9);
 			WriteTextModel(model);
 
 			Console.WriteLine("---------------------------------------------------");
@@ -125,7 +143,7 @@ namespace TextTaskDemo
 			ReplaceWordInSentence(model, 11, 4, new IWord[] {new Word("REPLACED")});
 			WriteSentence(model, 11);
 
-			CreateCorcordance("test.txt", "corcordance.txt", 5);
+
 //			Console.ReadKey ();
 		}
 	}
