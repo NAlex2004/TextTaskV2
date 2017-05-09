@@ -7,6 +7,7 @@ using NAlex.TextModel.Interfaces;
 using NAlex.TextModel.Model;
 using NAlex.TextModel.Parsers;
 using System.Collections.Generic;
+using System.Configuration;
 
 namespace TextTaskDemo
 {
@@ -99,7 +100,7 @@ namespace TextTaskDemo
 		}
 
 		static void CreateCorcordance(string inputFile, string outputFile, int linesPerPage)
-		{
+		{			
 			ICorcordanceBuilder<WordSymbol, IEntry<IWord, int>> corcordanceBuilder = new CorcordanceFileBuilder(inputFile,
 				linesPerPage,
 				new PageParser(), new EmptySentenceFactory());
@@ -113,13 +114,35 @@ namespace TextTaskDemo
 			}
 		}
 
+		static void PagesToFile(string inputFile, string outputFile, int linesPerPage)
+		{
+			IPageParser parser = new PageParser();
+			using (FileStream inputStream = new FileStream(inputFile, FileMode.Open))
+			{
+				var model = parser.GetTextPages(inputStream, linesPerPage, new EmptySentenceFactory());
+
+				using (StreamWriter writer = new StreamWriter(outputFile))
+				{
+					foreach (var page in model)
+					{
+						writer.WriteLine(page);
+					}
+					writer.Flush();
+				}
+			}
+		}
+
 		public static void Main(string[] args)
 		{
-            CreateCorcordance("test.txt", "corcordance.txt", 5);
+			string path = ConfigurationManager.AppSettings["SourceDir"] + Path.DirectorySeparatorChar;
+			string inputPath = path + "text.txt";
+
+			PagesToFile(inputPath, path + "pages.txt", 5);
+			CreateCorcordance(inputPath, path + "corcordance.txt", 5);
 
 			IEnumerable<ISentence> model;
 
-			using (FileStream fStream = new FileStream("test.txt", FileMode.Open))
+			using (FileStream fStream = new FileStream(inputPath, FileMode.Open))
 			{
 				IPageParser parser = new PageParser();
 				var pages = parser.GetTextPages(fStream, 10000000, new EmptySentenceFactory());

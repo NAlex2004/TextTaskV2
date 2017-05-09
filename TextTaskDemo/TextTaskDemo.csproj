@@ -30,6 +30,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Program.cs" />
@@ -41,5 +42,12 @@
       <Project>{2908C79C-FFE7-4EFC-86A6-D38753B9C825}</Project>
       <Name>TextModel</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Files\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="Files\text.txt" />
   </ItemGroup>
 </Project>
