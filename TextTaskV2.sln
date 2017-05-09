@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TextModel", "TextModel\TextModel.csproj", "{2908C79C-FFE7-4EFC-86A6-D38753B9C825}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TempTest", "TempTest\TempTest.csproj", "{983B8390-9C30-42F8-9C21-F0D3CAFF0818}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TextTaskDemo", "TextTaskDemo\TextTaskDemo.csproj", "{C212FA98-0DCA-49BA-B387-7971151EA522}"
 EndProject
 Global
@@ -17,10 +15,6 @@ Global
 		{2908C79C-FFE7-4EFC-86A6-D38753B9C825}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2908C79C-FFE7-4EFC-86A6-D38753B9C825}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2908C79C-FFE7-4EFC-86A6-D38753B9C825}.Release|Any CPU.Build.0 = Release|Any CPU
-		{983B8390-9C30-42F8-9C21-F0D3CAFF0818}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{983B8390-9C30-42F8-9C21-F0D3CAFF0818}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{983B8390-9C30-42F8-9C21-F0D3CAFF0818}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{983B8390-9C30-42F8-9C21-F0D3CAFF0818}.Release|Any CPU.Build.0 = Release|Any CPU
 		{C212FA98-0DCA-49BA-B387-7971151EA522}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{C212FA98-0DCA-49BA-B387-7971151EA522}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C212FA98-0DCA-49BA-B387-7971151EA522}.Release|Any CPU.ActiveCfg = Release|Any CPU
