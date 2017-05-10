@@ -77,7 +77,7 @@ namespace NAlex.TextModel.Model
                 {
                     string s = entry.Key.Value.ToLower();
 
-                    writer.WriteLine("{0}....{1}", entry.Key.Value.ToLower().PadRight(60, '.'), entry.EntryValue);
+                    writer.WriteLine("{0}.... {1}", entry.Key.Value.ToLower().PadRight(60, '.'), entry.EntryValue);
                 }
                 writer.WriteLine();
                 writer.WriteLine();

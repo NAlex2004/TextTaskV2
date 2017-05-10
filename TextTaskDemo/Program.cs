@@ -143,8 +143,8 @@ namespace TextTaskDemo
             string path = ConfigurationManager.AppSettings["SourceDir"] + Path.DirectorySeparatorChar;
             string inputPath = path + "text.txt";
 
-            PagesToFile(inputPath, path + "pages.txt", 5);
-            CreateCorcordance(inputPath, path + "corcordance.txt", 5);
+            PagesToFile(inputPath, path + "pages.txt", 3);
+            CreateCorcordance(inputPath, path + "corcordance.txt", 3);
 
             IEnumerable<ISentence> model;
 
