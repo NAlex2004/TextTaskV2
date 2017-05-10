@@ -112,11 +112,12 @@ namespace TextTaskDemo
 
             var corcordance = corcordanceBuilder.BuildCorcordance();
 
-            using (FileStream oStream = new FileStream(outputFile, FileMode.Create, FileAccess.Write))
-            {
-                corcordance.ToStream().CopyTo(oStream);
-                oStream.Flush();
-            }
+            if (corcordance != null)
+                using (FileStream oStream = new FileStream(outputFile, FileMode.Create, FileAccess.Write))
+                {
+                    corcordance.ToStream().CopyTo(oStream);
+                    oStream.Flush();
+                }
         }
 
         static void PagesToFile(string inputFile, string outputFile, int linesPerPage)

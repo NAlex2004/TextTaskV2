@@ -30,17 +30,16 @@ namespace NAlex.TextModel.Model
 
             try
             {
-                FileStream stream = new FileStream(_inputFile, FileMode.Open);
-
-                pages = _parser.GetTextPages(stream, _linesPerPage, _sentenceFactory);
-
-                stream.Dispose();
+                using (FileStream stream = new FileStream(_inputFile, FileMode.Open))
+                {
+                    pages = _parser.GetTextPages(stream, _linesPerPage, _sentenceFactory);
+                }
             }
             catch (Exception e)
             {
                 Console.WriteLine(e.Message);
                 return null;
-            }
+            }                
 
             var pageWords = pages.Select(p => new
                 {
