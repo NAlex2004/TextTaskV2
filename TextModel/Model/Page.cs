@@ -78,20 +78,20 @@ namespace NAlex.TextModel.Model
             lines.RemoveAt(index);
         }
 
-		public override string ToString()
-		{
-			StringBuilder sb = new StringBuilder();
-			sb.AppendLine(string.Format(" Page # {0}", PageNumber));
-			sb.AppendLine();
-			foreach (var sentencies in lines)
-			{
-				foreach (var sentence in sentencies)
-					sb.Append(sentence);
-				sb.AppendLine();
-			}
-			sb.AppendLine();
+        public override string ToString()
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.AppendLine(string.Format(" Page # {0}", PageNumber));
+            sb.AppendLine();
+            foreach (var sentencies in lines)
+            {
+                foreach (var sentence in sentencies)
+                    sb.Append(sentence);
+                sb.AppendLine();
+            }
+            sb.AppendLine();
 
-			return sb.ToString();
-		}
+            return sb.ToString();
+        }
     }
 }

@@ -62,11 +62,6 @@ namespace NAlex.TextModel.Model
             return _value.CompareTo(other.Value[0]);
         }
 
-        //public override bool Equals(object obj)
-        //{
-        //    return base.Equals(obj);
-        //}
-
         public bool Equals(WordSymbol other)
         {
             return Value.Equals(other.Value);

@@ -61,7 +61,6 @@ namespace NAlex.TextModel.Model
         {
             get 
             {
-                //return items.ElementAt(index); 
                 return items[index];
             }
             set

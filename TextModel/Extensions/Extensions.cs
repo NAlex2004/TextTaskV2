@@ -14,7 +14,6 @@ namespace NAlex.TextModel.Extensions
         public static bool IsVowel(this char ch)
         {
             char c = char.ToLower(ch);
-            bool res = vowels.Contains(char.ToLower(ch));
             return vowels.Contains(char.ToLower(ch));
         }
     }

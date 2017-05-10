@@ -19,6 +19,10 @@ namespace NAlex.TextModel.Parsers
                 return new Space();
         }
 
+        /// <summary>
+        /// Skip non-word items (spaces, punctuation marks) in text by condition
+        /// </summary>        
+        /// <returns>IEnumerable of skipped items</returns>
         IEnumerable<ITextItem> Skip(ref int index, Func<char, bool> condition)
         {
             ICollection<ITextItem> items = new List<ITextItem>();
@@ -32,6 +36,11 @@ namespace NAlex.TextModel.Parsers
             return items;
         }
 
+        /// <summary>
+        /// Create text model from text line. New line chars become part of a word.
+        /// Use PageParser to parse multiline text.
+        /// </summary>        
+        /// <returns>collection of text sentencies</returns>
         public ICollection<ISentence> GetTextModel(string line, ISentenceFactory sentenceFactory)
         {
             ICollection<ISentence> list = new List<ISentence>();
@@ -48,8 +57,6 @@ namespace NAlex.TextModel.Parsers
             int i = 0;
             while (i < text.Length)
             {
-                // NewLines ???
-
                 char ch = text[i].Equals(tab) ? ' ' : text[i];                     
 
                 if (ch.Equals(' '))
@@ -84,7 +91,7 @@ namespace NAlex.TextModel.Parsers
                             last = (Punctuation)marks.ElementAt(marks.Count() - 1);
                         }
                         
-                        // sentence end
+                        // sentence end. space must follow the end of the sentence
                         if (sentence.SentenceEndings.Contains(last) && i < (text.Length - 1) && text[i + 1].Equals(' '))
                         {
                             list.Add(sentence);
