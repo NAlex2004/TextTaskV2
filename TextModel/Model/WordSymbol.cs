@@ -13,7 +13,18 @@ namespace NAlex.TextModel.Model
     public struct WordSymbol : IComparable<WordSymbol>, IEquatable<WordSymbol>
     {
         private char _value;
+        private static char[] vowels = { 'e', 'y', 'u', 'i', 'o', 'a', 
+                                'у', 'е', 'ы', 'а', 'о', 'э', 'я', 'и', 'ю', 'ё'};
 
+
+        public bool IsVowel
+        {
+            get
+            {
+                return vowels.Contains(_value);
+            }
+        }
+    
         public WordSymbol(char value)
         {
             if (char.IsPunctuation(value) || value == ' ')

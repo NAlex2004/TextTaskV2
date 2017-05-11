@@ -62,7 +62,8 @@ namespace TextTaskDemo
             Console.WriteLine("Удаляем слова длиной {0} символов, начинающиеся на согласную:", wordLength);
             Console.Write(" Слова: ");
             var words = model.SelectMany(s => s.OfType<IWord>())
-                .Where(w => w.Length == wordLength && !w[0].Value[0].IsVowel())
+                //.Where(w => w.Length == wordLength && !w[0].Value[0].IsVowel())
+                .Where(w => w.Length == wordLength && !w[0].IsVowel)
                 .Distinct()
                 .ToArray();
             foreach (var w in words)
@@ -75,7 +76,8 @@ namespace TextTaskDemo
             Console.WriteLine();
             Console.WriteLine("Не удаляем:");
             var notDeleted = model.SelectMany(s => s.OfType<IWord>())
-                .Where(w => w.Length == wordLength && w[0].Value[0].IsVowel())
+                //.Where(w => w.Length == wordLength && w[0].Value[0].IsVowel())
+                .Where(w => w.Length == wordLength && w[0].IsVowel)
                 .Distinct()
                 .ToArray();
             foreach (var w in notDeleted)
@@ -170,8 +172,8 @@ namespace TextTaskDemo
             Console.WriteLine("---------------------------------------------------");
             Console.WriteLine(" Замена слов в предложении:");
             WriteSentence(model, 11);
-            Console.WriteLine();
-            ReplaceWordInSentence(model, 11, 4, new IWord[] {new Word("REPLACED")});
+            Console.WriteLine();            
+            ReplaceWordInSentence(model, 11, 4, new List<ITextItem>()  {new Word("REPLACED"), new Space(), new Word("BY"), new Space(), new Word("THIS")});
             WriteSentence(model, 11);
 
 
