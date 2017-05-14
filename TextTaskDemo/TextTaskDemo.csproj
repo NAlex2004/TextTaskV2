@@ -49,5 +49,7 @@
   <ItemGroup>
     <None Include="app.config" />
     <None Include="Files\text.txt" />
+    <None Include="Files\corcordance.txt" />
+    <None Include="Files\pages.txt" />
   </ItemGroup>
 </Project>
