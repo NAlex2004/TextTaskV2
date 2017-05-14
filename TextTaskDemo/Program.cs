@@ -125,18 +125,25 @@ namespace TextTaskDemo
         static void PagesToFile(string inputFile, string outputFile, int linesPerPage)
         {
             IPageParser parser = new PageParser();
-            using (FileStream inputStream = new FileStream(inputFile, FileMode.Open))
+            try
             {
-                var model = parser.GetTextPages(inputStream, linesPerPage, new EmptySentenceFactory());
-
-                using (StreamWriter writer = new StreamWriter(outputFile))
+                using (FileStream inputStream = new FileStream(inputFile, FileMode.Open))
                 {
-                    foreach (var page in model)
+                    var model = parser.GetTextPages(inputStream, linesPerPage, new EmptySentenceFactory());
+
+                    using (StreamWriter writer = new StreamWriter(outputFile))
                     {
-                        writer.WriteLine(page);
+                        foreach (var page in model)
+                        {
+                            writer.WriteLine(page);
+                        }
+                        writer.Flush();
                     }
-                    writer.Flush();
                 }
+            }
+            catch (IOException e)
+            {
+                Console.WriteLine(e.Message);
             }
         }
 
@@ -145,16 +152,30 @@ namespace TextTaskDemo
             string path = ConfigurationManager.AppSettings["SourceDir"] + Path.DirectorySeparatorChar;
             string inputPath = path + "text.txt";
 
+            if (!File.Exists(inputPath))
+            {
+                Console.WriteLine("File ../../Files/text.txt does not exist.");
+                return;
+            }
+
             PagesToFile(inputPath, path + "pages.txt", 3);
             CreateCorcordance(inputPath, path + "corcordance.txt", 3);
 
             IEnumerable<ISentence> model;
 
-            using (FileStream fStream = new FileStream(inputPath, FileMode.Open))
+            try
             {
-                IPageParser parser = new PageParser();
-                var pages = parser.GetTextPages(fStream, 10000000, new EmptySentenceFactory());
-                model = pages.SelectMany(p => p.SelectMany(s => s));
+                using (FileStream fStream = new FileStream(inputPath, FileMode.Open))
+                {
+                    IPageParser parser = new PageParser();
+                    var pages = parser.GetTextPages(fStream, 10000000, new EmptySentenceFactory());
+                    model = pages.SelectMany(p => p.SelectMany(s => s));
+                }
+            }
+            catch (IOException e)
+            {
+                Console.WriteLine(e.Message);
+                return;
             }
 
             WriteTextModel(model);
